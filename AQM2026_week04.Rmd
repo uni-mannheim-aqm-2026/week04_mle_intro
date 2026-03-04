@@ -2,8 +2,8 @@
 title: "AQM Week 04 -- Introduction to Maximum Likelihood"
 author: 
   - "Domantas Undzėnas"
-  - "Muhammad Muhammad"
-date: "March 6 | 7, 2025"
+  - "Lisa-Marie Müller"
+date: "March 5 | 6, 2026"
 output:
   html_document:
     toc: true
@@ -549,16 +549,12 @@ ll_linear <- function(theta, y, X) {
   sigma2_hat <- exp(gamma_hat)
   
   # Calculate the residuals
-  e <- y - X %*% beta_hat
+  e <- ???
   
   # Write down the log-likelihood
   ## HINT: pi in the equation above is the number pi
   ##       you can call it in R simply by typing "pi".
-  llik <-  - N / 2 * log(sigma2_hat) - 1/2 * ((t(e)%*%e)/sigma2_hat)
- 
-  ### You can also incorporate the log likelihood by using the inbuilt dnorm() command in R. Remember, d = density = likelihood of one data point. Summing them up you will get the log-likelihood. This will work with other distributions if you want to model those.
-  
-  # llik <-  sum(dnorm(y, mean = (X %*% beta_hat), sd = sqrt(sigma2_hat), log = T))
+  llik <- ???
   
   # Return the log-likelihood for optim()
   return(llik)
@@ -609,9 +605,9 @@ startvals <- c(0, 0, 0, 0)
 res <-
   optim(
     startvals,
-    fn = ll_linear,
-    y = y,
-    X = X,
+    fn = ???,
+    y = ???,
+    X = ???,
     control = list(fnscale = -1),
     method = "BFGS"
   )
@@ -622,13 +618,8 @@ res <-
 
 ```{r, eval = FALSE}
 
-ols <- lm(y ~ X[,2] + X[,3])
-
-res$par
-
-coef(ols)
+ols <- ???
   
-### What is the fourth coefficient in our res object?
   
 ```
 
