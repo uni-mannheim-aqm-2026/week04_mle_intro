@@ -549,12 +549,12 @@ ll_linear <- function(theta, y, X) {
   sigma2_hat <- exp(gamma_hat)
   
   # Calculate the residuals
-  e <- ???
+  e <- y - X %*% beta_hat
   
   # Write down the log-likelihood
   ## HINT: pi in the equation above is the number pi
   ##       you can call it in R simply by typing "pi".
-  llik <- ???
+  llik <- - 1/2 * N * log(sigma2_hat) - ((t(e) %*% e)/(2*sigma2_hat)) 
   
   # Return the log-likelihood for optim()
   return(llik)
@@ -605,12 +605,14 @@ startvals <- c(0, 0, 0, 0)
 res <-
   optim(
     startvals,
-    fn = ???,
-    y = ???,
-    X = ???,
+    fn = ll_linear,
+    y = y,
+    X = X,
     control = list(fnscale = -1),
     method = "BFGS"
   )
+
+res$par
 
 ```
 
@@ -618,7 +620,8 @@ res <-
 
 ```{r, eval = FALSE}
 
-ols <- ???
+ols <- lm(y ~ X[,2] + X[,3])
+summary(ols)
   
   
 ```
@@ -707,6 +710,7 @@ sample_sizes <- c(10, 50, 100, 300, 500, 1000)
 res <- list()
 for (i in sample_sizes){
  res[[paste(i)]] <- t(replicate(1000, mc(pop = pop, sample_n=i)))
+ print(i/sample_sizes)
 }
 
 par(mfrow = c(2, 3))
